@@ -4,10 +4,15 @@
 // Write a function declaration
 // named addNumbers that takes two
 // parameters (a and b) and returns their sum.
+function addNumbers(a, b){
+    return a + b;
+}
 // Then, create a function expression
 // that does exactly the same thing and
 // assign it to a const variable named addNumbersExpr.
-
+const addNumbersExpr = function(a, b){
+    return a + b;
+}
 // Task 2: Arrow Functions
 // Topic: Modern ES6 Features
 // Instructions:
@@ -15,7 +20,7 @@
 // Task 1 into a modern ES6 Arrow Function.
 // Assign it to a const variable named addNumbersArrow.
 // Keep the syntax as short as possible.
-
+const addNumbersArrow = (a, b) => a + b;
 // Task 3: Parameters and Arguments
 // Topic: Adding a Custom Function
 // Instructions:
@@ -25,7 +30,10 @@
 // the sentence: "Hello, my name is [firstName] and I am a [profession]."
 // After defining it, call the function and
 // pass your own name and profession as arguments.
-
+function introduce(firstName, profession){
+    console.log ('Hello, my name is ${firstName} and I am a ${profession}');
+}
+introduce("Nana", "doctor");
 // Task 4: Function Destructuring
 // Topic: Modern ES6 Features
 // Instructions:
@@ -35,6 +43,9 @@
 // Use ES6 object destructuring directly inside the function parameters
 // to extract these values and log them to the console.
 // Example object to pass: { brand: 'Toyota', model: 'Corolla', year: 2022 }
+const displayCarDetails = ({ brand, model, year}) => {
+    console.log('brand: ${brand}, model: ${model}, year: ${year}')
+}
 
 // Task 5: Returning Values vs Logging
 // Topic: Returning Values
@@ -45,22 +56,37 @@
 // Call the function with a price of 200 and a discount of 15,
 // store the returned result in a variable named finalPrice,
 // and then console.log(finalPrice) outside the function.
-
+function calculateDiscount(price, discountPercentage){
+    return price - price * (discountPercentage / 100);
+}
+const finalPrice = calculateDiscount(200, 15);
+console.log(finalPrice);
 // Task 6: Hoisting
 // Topic: The Importance of Code Order
 // Instructions:
 // Write a function declaration called sayGoodbye that returns the string "Goodbye!".
 // To demonstrate hoisting, call this function and log its result on the line above
 // where the function is actually defined in your code.
-
+console.log(sayGoodbye());
+function sayGoodbye(){
+    return 'Goodbye!';
+}
 // Task 7: Global and Local Scope
 // Topic: Introduction to Scopes
 // Instructions:
 // Declare a global variable named secretCode with the value "XYZ123".
+const secretCode = XYZ123;
 // Write a function called testScope.
 // Inside this function, declare
 // a local variable named localPin with the value "9999".
 // Inside the function, try logging both variables.
+function testScope(){
+    let localPin = 9999;
+    console.log(localPin);
+    console.log(secretCode);
+}
+// console.log(localPin); this line is causing ReferenceError, because it doesnt work outside the function.
+console.log(secretCode);
 // Outside the function, try logging both variables.
 // Observe which one causes a ReferenceError and comment out the line that breaks the code.
 
@@ -68,9 +94,16 @@
 // Topic: Shadowed Variables
 // Instructions:
 // Declare a global let variable named playerScore and set it to 10.
+let playerScore = 10;
 // Write a function named updateScore. Inside the function,
 // declare a local variable with the exact same
 // name (let playerScore) and set it to 50 (this is shadowing).
+function updateScore(){
+    let playerScore = 50;
+    console.log(playerScore);
+}
+updateScore();
+console.log(playerScore);
 // Log playerScore inside the function, call the function,
 // and then log playerScore outside the function.
 // Notice how the global variable remains unchanged.
@@ -79,10 +112,17 @@
 // Topic: Executing Functions Indirectly
 // Instructions:
 // Write a simple function named alertUser that logs "Action completed!".
+function alertUser(){
+    console.log('Action completed!');
+}
 // Write a second function named executeCallback that takes a parameter called callbackFunc.
+function executeCallback(callbackFunc){
+    callbackFunc();
+}
 // Inside executeCallback, execute the callbackFunc.
 // Call executeCallback and pass alertUser as
 // an argument (remember to pass it indirectly, without parentheses).
+executeCallback(alertUser);
 
 // Task 10: Indirect vs. Direct Execution with setTimeout
 // Topic: Indirect vs. Direct Execution
@@ -92,3 +132,9 @@
 // Ensure you are passing the function reference correctly (indirect execution).
 // Write a comment explaining what would happen if you used
 // timeIsUp() with parentheses inside the setTimeout.
+function timeIsUp(){
+    console.log('Time is up!');
+    setTimeout(timeIsUp, 3000);
+}
+// if we used timeIsUp() with parentheses inside the setTimeout, 
+//function wouldn't wait for 3 seconds and would execute the moment we started our program.
